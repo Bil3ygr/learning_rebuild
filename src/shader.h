@@ -4,10 +4,10 @@
 #include <glm/glm.hpp>
 #include "utils.h"
 
-unsigned int createShader(GLenum shaderType, const char *shaderSource);
-unsigned int createProgram(int vs, int fs, int gs = NULL);
-unsigned int createProgram(const char *vsfile, const char *fsfile, const char *gsfile = nullptr);
-unsigned int createVertexInfo(
+GLuint createShader(GLenum shaderType, const char *shaderSource);
+GLuint createProgram(GLuint vs, GLuint fs, GLuint gs = NULL);
+GLuint createProgram(const char *vsfile, const char *fsfile, const char *gsfile = nullptr);
+GLuint createVertexInfo(
 	float *vertices, int vertices_size,
 	int *pointers, int pointer_count, bool *pointer_enable,
 	int *indices = nullptr, int indices_size = 0);
@@ -15,7 +15,7 @@ unsigned int createVertexInfo(
 class Shader
 {
 public:
-	unsigned int ID = NULL;
+	GLuint ID = NULL;
 
 	Shader(const char *vsfile, const char *fsfile, const char *gsfile = nullptr);
 	~Shader();

@@ -1,16 +1,16 @@
 #include "shader.h"
 #include "texture.h"
 
-unsigned int createShader(GLenum shaderType, const char *shaderSource)
+GLuint createShader(GLenum shaderType, const char *shaderSource)
 {
-	unsigned int shader = glCreateShader(shaderType);
+	GLuint shader = glCreateShader(shaderType);
 	glShaderSource(shader, 1, &shaderSource, NULL);
 	glCompileShader(shader);
 	int success;
-	char infoLog[512];
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
+		char infoLog[512];
 		glGetShaderInfoLog(shader, 512, NULL, infoLog);
 		std::cout << "Shader compile failed:\n"
 				  << infoLog << std::endl;
@@ -20,19 +20,19 @@ unsigned int createShader(GLenum shaderType, const char *shaderSource)
 	return shader;
 }
 
-unsigned int createProgram(int vs, int fs, int gs)
+GLuint createProgram(GLuint vs, GLuint fs, GLuint gs)
 {
-	unsigned int program = glCreateProgram();
+	GLuint program = glCreateProgram();
 	glAttachShader(program, vs);
 	glAttachShader(program, fs);
 	if (gs != NULL)
 		glAttachShader(program, gs);
 	glLinkProgram(program);
 	int success;
-	char infoLog[512];
 	glGetProgramiv(program, GL_LINK_STATUS, &success);
 	if (!success)
 	{
+		char infoLog[512];
 		glGetProgramInfoLog(program, 512, NULL, infoLog);
 		std::cout << "Program link failed:\n"
 				  << infoLog << std::endl;
@@ -47,15 +47,15 @@ unsigned int createProgram(int vs, int fs, int gs)
 	return program;
 }
 
-unsigned int createProgram(const char *vsfile, const char *fsfile, const char *gsfile)
+GLuint createProgram(const char *vsfile, const char *fsfile, const char *gsfile)
 {
-	unsigned int vs = createShader(GL_VERTEX_SHADER, readFile(vsfile));
+	GLuint vs = createShader(GL_VERTEX_SHADER, readFile(vsfile));
 	if (vs == NULL)
 		return NULL;
-	unsigned int fs = createShader(GL_FRAGMENT_SHADER, readFile(fsfile));
+	GLuint fs = createShader(GL_FRAGMENT_SHADER, readFile(fsfile));
 	if (fs == NULL)
 		return NULL;
-	unsigned int gs = NULL;
+	GLuint gs = NULL;
 	if (gsfile != nullptr)
 	{
 		gs = createShader(GL_GEOMETRY_SHADER, readFile(gsfile));
@@ -65,12 +65,12 @@ unsigned int createProgram(const char *vsfile, const char *fsfile, const char *g
 	return createProgram(vs, fs, gs);
 }
 
-unsigned int createVertexInfo(
+GLuint createVertexInfo(
 	float *vertices, int vertices_size,
 	int *pointers, int pointer_count, bool *pointer_enable,
 	int *indices, int indices_size)
 {
-	unsigned int VAO, VBO, EBO = NULL;
+	GLuint VAO, VBO, EBO = NULL;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	// 绑定顶点数组

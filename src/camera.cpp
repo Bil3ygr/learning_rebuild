@@ -116,7 +116,7 @@ glm::mat4 Camera::getProjection()
 	return glm::perspective(glm::radians(m_fZoom), m_fWidth / m_fHeight, m_fNear, m_fFar);
 }
 
-void intiCamera()
+void initCamera()
 {
 	Camera &camera = Camera::get_instance();
 	camera.updateCameraVectors();
