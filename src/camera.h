@@ -14,7 +14,7 @@ public:
 	Camera &operator=(const Camera &) = delete;
 	static Camera &get_instance();
 
-	void initCamera(float width, float height, float fovy, float nera, float far);
+	void initCamera(float width, float height, float fovy, float near, float far);
 	void setViewPort(float width, float height);
 	void mouseMove(float xpos, float ypos, GLboolean limit = true);
 	void mouseScroll(float yoffset);
@@ -46,7 +46,7 @@ private:
 	float m_fFrameTime;
 };
 
-void initCamera();
+void initCamera(float width, float height, float fovy, float nera, float far);
 
 void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
 void cursorPosCallback(GLFWwindow *window, double xpos, double ypos);

@@ -4,7 +4,7 @@ class Scene
 {
 public:
 	Scene(char *name) : m_cName(name) {}
-	~Scene() {}
+	virtual ~Scene() {}
 
 	virtual void onEnter() = 0;
 	virtual void onExit() = 0;

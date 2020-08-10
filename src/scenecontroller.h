@@ -1,5 +1,6 @@
 #pragma once
 
+#include "main.h"
 #include "scenemgr.h"
 
-void createColorRect();
+void createColorRect(GLFWwindow *window);

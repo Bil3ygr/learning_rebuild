@@ -15,7 +15,7 @@ GLuint createVertexInfo(
 class Shader
 {
 public:
-	GLuint ID = NULL;
+	GLuint ID = 0;
 
 	Shader(const char *vsfile, const char *fsfile, const char *gsfile = nullptr);
 	~Shader();

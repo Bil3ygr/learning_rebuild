@@ -119,6 +119,7 @@ Shader::Shader(const char *vsfile, const char *fsfile, const char *gsfile)
 Shader::~Shader()
 {
 	glDeleteProgram(ID);
+	ID = 0;
 }
 
 void Shader::use()

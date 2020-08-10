@@ -1,6 +1,11 @@
 #include "scene_colorrect.h"
 #include "camera.h"
 
+SceneColorRect::~SceneColorRect()
+{
+	delete m_pController;
+}
+
 void SceneColorRect::onEnter()
 {
 	Camera &camera = Camera::get_instance();
@@ -33,7 +38,8 @@ void SceneColorRect::onEnter()
 
 void SceneColorRect::onExit()
 {
-	delete m_pController;
+	m_pController->setClearColor(0, 0, 0);
+	m_pController->clear();
 }
 
 void SceneColorRect::update(float time)

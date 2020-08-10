@@ -9,7 +9,6 @@ Controller::~Controller()
 {
 	glDeleteVertexArrays(1, &m_nVAO);
 	delete m_pShader;
-	m_pShader = nullptr;
 }
 
 void Controller::setVertexInfo(

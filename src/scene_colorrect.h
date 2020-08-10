@@ -7,6 +7,7 @@ class SceneColorRect : public Scene
 {
 public:
 	SceneColorRect(char *name) : Scene(name) {}
+	~SceneColorRect();
 
 	void onEnter();
 	void onExit();

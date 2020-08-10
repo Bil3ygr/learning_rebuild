@@ -8,7 +8,7 @@ SceneMgr &SceneMgr::get_instance()
 
 void SceneMgr::setScene(Scene *scene)
 {
-	if (m_pScene)
+	if (m_pScene != nullptr)
 	{
 		m_pScene->onExit();
 		delete m_pScene;
@@ -25,13 +25,13 @@ Scene *SceneMgr::getCurrentScene()
 
 void SceneMgr::update(float time)
 {
-	if (m_pScene)
+	if (m_pScene != nullptr)
 		m_pScene->update(time);
 }
 
 void SceneMgr::clearScene()
 {
-	if (m_pScene)
+	if (m_pScene != nullptr)
 	{
 		m_pScene->onExit();
 		delete m_pScene;

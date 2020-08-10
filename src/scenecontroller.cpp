@@ -1,8 +1,10 @@
 #include "scenecontroller.h"
 #include "scene_colorrect.h"
 
-void createColorRect()
+void createColorRect(GLFWwindow *window)
 {
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
 	char *name = "ColorRect";
 	SceneMgr &mgr = SceneMgr::get_instance();
 	Scene *current_scene = mgr.getCurrentScene();
