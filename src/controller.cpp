@@ -9,6 +9,7 @@ Controller::~Controller()
 {
 	glDeleteVertexArrays(1, &m_nVAO);
 	delete m_pShader;
+	glBindVertexArray(0);
 }
 
 void Controller::setVertexInfo(
@@ -50,11 +51,17 @@ void Controller::setClearColor(float r, float g, float b, float a)
 	m_fClearG = g;
 	m_fClearB = b;
 	m_fClearA = a;
+	m_bSetClearColor = true;
 }
 
 void Controller::clear()
 {
-	glClearColor(m_fClearR, m_fClearG, m_fClearB, m_fClearA);
+	if (m_bSetClearColor)
+	{
+		m_bSetClearColor = false;
+		glClearColor(m_fClearR, m_fClearG, m_fClearB, m_fClearA);
+	}
+
 	if (m_bDepthEnable)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	else

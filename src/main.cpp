@@ -20,7 +20,7 @@ void keyCallback(GLFWwindow *window, int key, int scanecode, int action, int mod
 			if (mgr.getCurrentScene() != nullptr)
 			{
 				mgr.clearScene();
-				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			}
 			else
 				glfwSetWindowShouldClose(window, true);
@@ -54,8 +54,7 @@ bool initGLFW(float width, float height)
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
 	glfwSetCursorPosCallback(window, cursorPosCallback);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	glfwSetScrollCallback(window, scrollCallback);
 	glfwSetKeyCallback(window, keyCallback);
 
@@ -78,23 +77,10 @@ void loop(float time)
 
 void processInput()
 {
-	// if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	// {
-	// 	SceneMgr &mgr = SceneMgr::get_instance();
-	// 	std::cout << mgr.getCurrentScene() << std::endl;
-	// 	std::cout << (mgr.getCurrentScene() == nullptr) << std::endl;
-	// 	if (mgr.getCurrentScene() != nullptr)
-	// 	{
-	// 		mgr.clearScene();
-	// 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	// 	}
-	// 	else
-	// 		glfwSetWindowShouldClose(window, true);
-	// 	return;
-	// }
-
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 		createColorRect(window);
+	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+		createTextureRect(window);
 
 	cameraKeyMove(window);
 }

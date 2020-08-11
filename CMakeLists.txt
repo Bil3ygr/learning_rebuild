@@ -6,6 +6,7 @@ message(STATUS "Configuring project")
 set(INCLUDE_DIR include)
 set(LIB_DIR lib)
 set(SRC_DIR src)
+set(RES_DIR res)
 
 # include目录和lib目录
 message(STATUS "Configuring include and lib directory")
@@ -15,6 +16,7 @@ link_directories(${LIB_DIR})
 # 拷贝资源
 message(STATUS "Copying shader")
 file(COPY ${SRC_DIR}/shader DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${RES_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 set(HEADER_FILES
     ${SRC_DIR}/camera.h
@@ -23,6 +25,7 @@ set(HEADER_FILES
     ${SRC_DIR}/main.h
     ${SRC_DIR}/scene.h
     ${SRC_DIR}/scene_colorrect.h
+    ${SRC_DIR}/scene_texturerect.h
     ${SRC_DIR}/scenecontroller.h
     ${SRC_DIR}/scenemgr.h
     ${SRC_DIR}/shader.h
@@ -38,6 +41,7 @@ set(SOURCE_FILES
     ${SRC_DIR}/main.cpp
     ${SRC_DIR}/scene.cpp
     ${SRC_DIR}/scene_colorrect.cpp
+    ${SRC_DIR}/scene_texturerect.cpp
     ${SRC_DIR}/scenecontroller.cpp
     ${SRC_DIR}/scenemgr.cpp
     ${SRC_DIR}/shader.cpp

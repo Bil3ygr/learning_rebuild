@@ -13,6 +13,7 @@ void SceneColorRect::onEnter()
 
 	m_pController = new Controller("shader/vs.glsl", "shader/fs.glsl");
 	m_pController->setClearColor(0.2f, 0.3f, 0.3f);
+	m_pController->setDepthEnable();
 
 	float vertices[] = {
 		0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
@@ -27,8 +28,8 @@ void SceneColorRect::onEnter()
 		true, true};
 
 	int indices[] = {
-		0, 1, 3,
-		1, 2, 3};
+		0, 2, 3,
+		0, 1, 2};
 
 	m_pController->setVertexInfo(
 		vertices, sizeof(vertices),
@@ -38,15 +39,11 @@ void SceneColorRect::onEnter()
 
 void SceneColorRect::onExit()
 {
-	m_pController->setClearColor(0, 0, 0);
-	m_pController->clear();
 }
 
 void SceneColorRect::update(float time)
 {
-	m_pController->setDepthEnable();
 	m_pController->clear();
-
 	m_pController->use();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

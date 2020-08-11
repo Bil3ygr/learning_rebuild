@@ -3,11 +3,11 @@
 #include "scene.h"
 #include "controller.h"
 
-class SceneColorRect : public Scene
+class SceneTextureRect : public Scene
 {
 public:
-	SceneColorRect(char *name) : Scene(name) {}
-	~SceneColorRect();
+	SceneTextureRect(char *name) : Scene(name) {}
+	~SceneTextureRect();
 
 	void onEnter();
 	void onExit();

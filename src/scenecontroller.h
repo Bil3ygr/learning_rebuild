@@ -4,3 +4,4 @@
 #include "scenemgr.h"
 
 void createColorRect(GLFWwindow *window);
+void createTextureRect(GLFWwindow *window);

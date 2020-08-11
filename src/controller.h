@@ -8,6 +8,8 @@
 class Controller
 {
 public:
+	Shader *m_pShader = nullptr;
+
 	Controller(const char *vsfile, const char *fsfile, const char *gsfile = nullptr);
 	~Controller();
 
@@ -24,9 +26,9 @@ public:
 	void activeTexture(GLenum texture_index, int index);
 
 private:
-	Shader *m_pShader = nullptr;
 	unsigned int m_nVAO = NULL;
 	std::vector<unsigned int> m_lTexture;
 	float m_fClearR, m_fClearG, m_fClearB, m_fClearA;
 	bool m_bDepthEnable = false;
+	bool m_bSetClearColor = false;
 };
