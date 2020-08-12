@@ -26,6 +26,7 @@ set(HEADER_FILES
     ${SRC_DIR}/scene.h
     ${SRC_DIR}/scene_colorrect.h
     ${SRC_DIR}/scene_texturerect.h
+    ${SRC_DIR}/scene_cube.h
     ${SRC_DIR}/scenecontroller.h
     ${SRC_DIR}/scenemgr.h
     ${SRC_DIR}/shader.h
@@ -42,6 +43,7 @@ set(SOURCE_FILES
     ${SRC_DIR}/scene.cpp
     ${SRC_DIR}/scene_colorrect.cpp
     ${SRC_DIR}/scene_texturerect.cpp
+    ${SRC_DIR}/scene_cube.cpp
     ${SRC_DIR}/scenecontroller.cpp
     ${SRC_DIR}/scenemgr.cpp
     ${SRC_DIR}/shader.cpp

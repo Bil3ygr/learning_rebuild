@@ -77,11 +77,7 @@ void loop(float time)
 
 void processInput()
 {
-	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
-		createColorRect(window);
-	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-		createTextureRect(window);
-
+	switchScene(window);
 	cameraKeyMove(window);
 }
 
