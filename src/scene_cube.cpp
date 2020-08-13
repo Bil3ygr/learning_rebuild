@@ -15,7 +15,6 @@ void SceneCube::onEnter()
     m_pController->addTexture("res/container.jpg");
 	m_pController->setClearColor(0.3f, 0.3f, 0.2f);
 	m_pController->setDepthEnable(true);
-	m_pController->setDepthEnable();
 
 	float vertices[] = {
 	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -83,6 +82,7 @@ void SceneCube::update(float time)
 {
     Camera &camera = Camera::get_instance();
 
+	m_pController->setDepthEnable();
 	m_pController->clear();
 	m_pController->use();
 	m_pController->activeTexture(GL_TEXTURE0, 0);

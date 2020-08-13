@@ -25,6 +25,8 @@ public:
 
 	glm::mat4 getView();
 	glm::mat4 getProjection();
+	glm::vec3 getPos();
+	glm::vec3 getFront();
 
 private:
 	Camera() {}

@@ -14,7 +14,6 @@ void SceneTextureRect::onEnter()
 	m_pController = new Controller("shader/texvs.glsl", "shader/texfs.glsl");
     m_pController->addTexture("res/container.jpg");
 	m_pController->setClearColor(0.3f, 0.2f, 0.3f);
-	m_pController->setDepthEnable();
 
     float vertices[] = {
 		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
@@ -50,6 +49,7 @@ void SceneTextureRect::onExit()
 
 void SceneTextureRect::update(float time)
 {
+	m_pController->setDepthEnable();
     m_pController->clear();
 	m_pController->use();
     m_pController->activeTexture(GL_TEXTURE0, 0);

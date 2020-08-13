@@ -2,6 +2,7 @@
 #include "scene_colorrect.h"
 #include "scene_texturerect.h"
 #include "scene_cube.h"
+#include "scene_light.h"
 
 void createColorRect(GLFWwindow *window)
 {
@@ -48,6 +49,21 @@ void createCube(GLFWwindow *window)
 	}
 }
 
+void createLight(GLFWwindow *window)
+{
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	char *name = "Light";
+	SceneMgr &mgr = SceneMgr::get_instance();
+	Scene *current_scene = mgr.getCurrentScene();
+
+	if (current_scene == nullptr || strcmp(current_scene->getName(), name) != 0)
+	{
+		SceneLight *scene = new SceneLight(name);
+		mgr.setScene((Scene *)scene);
+	}
+}
+
 void switchScene(GLFWwindow *window)
 {
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
@@ -56,4 +72,6 @@ void switchScene(GLFWwindow *window)
 		createTextureRect(window);
 	else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 		createCube(window);
+	else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+		createLight(window);
 }

@@ -105,8 +105,7 @@ void Camera::keyMove(CAMERA_DIR dir)
 		m_vPos += m_vRight * velocity;
 }
 
-glm::mat4
-Camera::getView()
+glm::mat4 Camera::getView()
 {
 	return glm::lookAt(m_vPos, m_vPos + m_vFront, m_vRealUp);
 }
@@ -114,6 +113,16 @@ Camera::getView()
 glm::mat4 Camera::getProjection()
 {
 	return glm::perspective(glm::radians(m_fZoom), m_fWidth / m_fHeight, m_fNear, m_fFar);
+}
+
+glm::vec3 Camera::getPos()
+{
+	return m_vPos;
+}
+
+glm::vec3 Camera::getFront()
+{
+	return m_vFront;
 }
 
 void initCamera(float width, float height, float fovy, float near, float far)
