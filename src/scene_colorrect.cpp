@@ -11,7 +11,7 @@ void SceneColorRect::onEnter()
 	Camera &camera = Camera::get_instance();
 	camera.setEnable(false);
 
-	m_pController = new Controller("shader/vs.glsl", "shader/fs.glsl");
+	m_pController=new Controller("shader/vs.glsl", "shader/fs.glsl");
 	m_pController->setClearColor(0.2f, 0.3f, 0.3f);
 
 	float vertices[] = {

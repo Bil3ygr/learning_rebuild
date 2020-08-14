@@ -92,6 +92,7 @@ void SceneLight::update(float time)
     Camera &camera = Camera::get_instance();
 
     m_pObjectController->setDepthEnable();
+	m_pObjectController->clear();
     m_pObjectController->use();
     m_pObjectController->activeTexture(GL_TEXTURE1, 0);
     m_pObjectController->activeTexture(GL_TEXTURE2, 1);
