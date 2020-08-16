@@ -28,12 +28,15 @@ set(HEADER_FILES
     ${SRC_DIR}/scene_texturerect.h
     ${SRC_DIR}/scene_cube.h
     ${SRC_DIR}/scene_light.h
+    ${SRC_DIR}/scene_model.h
     ${SRC_DIR}/scenecontroller.h
     ${SRC_DIR}/scenemgr.h
     ${SRC_DIR}/shader.h
     ${SRC_DIR}/stb_image.h
     ${SRC_DIR}/texture.h
     ${SRC_DIR}/utils.h
+    ${SRC_DIR}/mesh.h
+    ${SRC_DIR}/model.h
 )
 
 set(SOURCE_FILES
@@ -46,12 +49,15 @@ set(SOURCE_FILES
     ${SRC_DIR}/scene_texturerect.cpp
     ${SRC_DIR}/scene_cube.cpp
     ${SRC_DIR}/scene_light.cpp
+    ${SRC_DIR}/scene_model.cpp
     ${SRC_DIR}/scenecontroller.cpp
     ${SRC_DIR}/scenemgr.cpp
     ${SRC_DIR}/shader.cpp
     ${SRC_DIR}/stb_image.cpp
     ${SRC_DIR}/texture.cpp
     ${SRC_DIR}/utils.cpp
+    ${SRC_DIR}/mesh.cpp
+    ${SRC_DIR}/model.cpp
 )
 
 message(STATUS "Configuring source files and header files")
