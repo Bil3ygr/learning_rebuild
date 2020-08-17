@@ -13,7 +13,7 @@ void SceneModel::onEnter()
 
 	m_pController = new Controller("shader/modelvs.glsl", "shader/modelfs.glsl");
 	m_pController->setDepthEnable(true);
-	m_pController->setClearColor(0.2f, 0.2f, 0.2f);
+	m_pController->setClearColor(0.05f, 0.05f, 0.05f);
 
 	m_pModel = new Model("res/nanosuit/nanosuit.obj");
 }
