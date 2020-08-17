@@ -39,5 +39,5 @@ void SceneModel::update(float time)
 	model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));		// it's a bit too big for our scene, so scale it down
 	m_pController->m_pShader->setMat4("model", model);
 
-	m_pModel->Draw(*(m_pController->m_pShader));
+	m_pModel->Update(m_pController);
 }

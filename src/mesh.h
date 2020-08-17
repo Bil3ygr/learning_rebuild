@@ -1,6 +1,6 @@
 #pragma once
 
-#include "shader.h"
+#include "controller.h"
 #include <assimp/Importer.hpp>
 #include <string>
 #include <vector>
@@ -25,7 +25,7 @@ class Mesh
 {
 public:
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
-	void Draw(Shader shader);
+	void Update(Controller *controller);
 
 private:
 	vector<Vertex> m_vVertices;

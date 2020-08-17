@@ -1,17 +1,16 @@
 #pragma once
 
+#include "controller.h"
 #include "mesh.h"
-#include "texture.h"
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
-#include <iostream>
 
 class Model
 {
 public:
 	Model(const char *path);
-	void Draw(Shader shader);
+	void Update(Controller *controller);
 
 private:
 	vector<Texture> m_vTexturesLoaded;

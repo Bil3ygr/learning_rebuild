@@ -6,10 +6,10 @@ Model::Model(const char *path)
 	loadModel(path);
 }
 
-void Model::Draw(Shader shader)
+void Model::Update(Controller *controller)
 {
 	for (unsigned int i = 0; i < m_vMeshes.size(); i++)
-		m_vMeshes[i].Draw(shader);
+		m_vMeshes[i].Update(controller);
 }
 
 void Model::loadModel(string path)
