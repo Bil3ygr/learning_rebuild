@@ -1,13 +1,13 @@
 #include "mesh.h"
 
-Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures) : m_vVertices(vertices), m_vIndices(indices), m_vTextures(textures)
+Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures) : m_vVertices(vertices), m_vIndices(indices), m_vTextures(textures)
 {
 	int pointers[] = {3, 3, 2};
 	bool enables[] = {true, true, true};
 	m_nVAO = createVertexInfo(
 		&m_vVertices[0], m_vVertices.size() * sizeof(Vertex),
 		pointers, sizeof(pointers) / sizeof(pointers[0]), enables,
-		&m_vIndices[0], m_vIndices.size() * sizeof(unsigned int));
+		&m_vIndices[0], m_vIndices.size() * sizeof(GLuint));
 }
 
 void Mesh::Update(Controller *controller)
@@ -24,7 +24,7 @@ void Mesh::Update(Controller *controller)
 		else if (name == "texutre_specular")
 			number = to_string(specularNr++);
 
-		controller->m_pShader.setFloat(("material." + name + number).c_str(), (float)i);
+		controller->m_pShader->setFloat(("material." + name + number).c_str(), (float)i);
 		glBindTexture(GL_TEXTURE_2D, m_vTextures[i].id);
 	}
 	glActiveTexture(GL_TEXTURE0);

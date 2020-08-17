@@ -16,7 +16,7 @@ struct Vertex
 
 struct Texture
 {
-	unsigned int id;
+	GLuint id;
 	string type;
 	string path;
 };
@@ -24,12 +24,12 @@ struct Texture
 class Mesh
 {
 public:
-	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
+	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
 	void Update(Controller *controller);
 
 private:
 	vector<Vertex> m_vVertices;
-	vector<unsigned int> m_vIndices;
+	vector<GLuint> m_vIndices;
 	vector<Texture> m_vTextures;
 
 	GLuint m_nVAO;

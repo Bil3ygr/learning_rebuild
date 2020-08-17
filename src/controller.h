@@ -1,9 +1,9 @@
 #pragma once
 
+#include <vector>
 #include "main.h"
 #include "shader.h"
 #include "texture.h"
-#include <vector>
 
 class Controller
 {

@@ -43,7 +43,7 @@ void Model::processNode(aiNode *node, const aiScene *scene)
 Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 {
 	vector<Vertex> vertices;
-	vector<unsigned int> indices;
+	vector<GLuint> indices;
 	vector<Texture> textures;
 	// 顶点
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)

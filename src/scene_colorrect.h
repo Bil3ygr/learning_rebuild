@@ -1,7 +1,7 @@
 #pragma once
 
-#include "controller.h"
 #include "scene.h"
+#include "controller.h"
 
 class SceneColorRect : public Scene
 {

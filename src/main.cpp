@@ -1,7 +1,7 @@
 #include "main.h"
 #include "camera.h"
-#include "scenecontroller.h"
 #include "scenemgr.h"
+#include "scenecontroller.h"
 
 GLFWwindow *window = NULL;
 bool esc_press = false;

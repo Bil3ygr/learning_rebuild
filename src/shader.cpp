@@ -142,9 +142,9 @@ GLuint createProgram(const char *vsfile, const char *fsfile, const char *gsfile)
 }
 
 GLuint createVertexInfo(
-	float *vertices, int vertices_size,
+	const void *vertices, int vertices_size,
 	int *pointers, int pointer_count, bool *pointer_enable,
-	int *indices, int indices_size)
+	const void *indices, int indices_size)
 {
 	GLuint VAO, VBO, EBO = NULL;
 	glGenVertexArrays(1, &VAO);
