@@ -1,5 +1,5 @@
-#include <iostream>
 #include "mesh.h"
+#include <iostream>
 
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures) : m_vVertices(vertices), m_vIndices(indices), m_vTextures(textures)
 {

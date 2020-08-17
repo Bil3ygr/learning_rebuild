@@ -1,11 +1,11 @@
 #pragma once
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-#include <iostream>
 #include "mesh.h"
 #include "texture.h"
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
+#include <assimp/scene.h>
+#include <iostream>
 
 class Model
 {

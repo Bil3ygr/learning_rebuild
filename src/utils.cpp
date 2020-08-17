@@ -1,5 +1,5 @@
-#include <iostream>
 #include "utils.h"
+#include <iostream>
 
 const char *readFile(const char *filename, int filesize)
 {

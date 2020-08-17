@@ -47,14 +47,13 @@ void main()
 	//vec3 viewDir = normalize(viewPos - fragPos);
 	//vec3 reflectDir = reflect(-lightDir, norm);
 	//float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-	
+
 	//vec3 result = (ambient + diffuse + spec) * objectColor;
 	//FragColor = vec4(result, 1.0);
 
-	// 环境光
 	//vec3 ambient = light.ambient * material.ambient;
 	vec3 ambient = light.ambient * vec3(texture(material.diffuse, fragTexCoords));
-	// 漫反射
+
 	vec3 norm = normalize(fragNormal);
 	vec3 lightDir;
 	if (light.type == 1)
@@ -63,9 +62,9 @@ void main()
 		lightDir = normalize(light.position - fragPos);
 	float diff = max(dot(norm, lightDir), 0.0);
 	//vec3 diffuse = light.diffuse * (diff * material.diffuse);
-	// 漫反射贴图
+
 	vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, fragTexCoords));
-	//镜面光
+
 	vec3 viewDir = normalize(viewPos - fragPos);
 	vec3 reflectDir = reflect(-lightDir, norm);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);

@@ -1,9 +1,9 @@
 #include "scenecontroller.h"
 #include "scene_colorrect.h"
-#include "scene_texturerect.h"
 #include "scene_cube.h"
 #include "scene_light.h"
 #include "scene_model.h"
+#include "scene_texturerect.h"
 
 void createColorRect(GLFWwindow *window)
 {

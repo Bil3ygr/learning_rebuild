@@ -1,9 +1,9 @@
 #pragma once
 
+#include "shader.h"
+#include <assimp/Importer.hpp>
 #include <string>
 #include <vector>
-#include <assimp/Importer.hpp>
-#include "shader.h"
 
 using namespace ::std;
 
