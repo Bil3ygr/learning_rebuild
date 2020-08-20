@@ -1,8 +1,8 @@
 #pragma once
 
-#include "scene.h"
 #include "controller.h"
 #include "model.h"
+#include "scene.h"
 
 class SceneModel : public Scene
 {

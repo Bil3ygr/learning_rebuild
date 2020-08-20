@@ -81,9 +81,10 @@ void Controller::activeTexture(GLenum texture_index, int index)
 	}
 }
 
-void Controller::update()
+void Controller::update(bool clear_color)
 {
 	setDepthEnable();
-	clear();
+	if (clear_color)
+		clear();
 	use();
 }

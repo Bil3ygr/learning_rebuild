@@ -86,10 +86,8 @@ void SceneCube::update(float time)
 	glm::mat4 model = glm::mat4(1.0f);
 	// model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-	glm::mat4 view = glm::mat4(1.0f);
-	view = camera.getView();
-	glm::mat4 projection = glm::mat4(1.0f);
-	projection = camera.getProjection();
+	glm::mat4 view = camera.getView();
+	glm::mat4 projection = camera.getProjection();
 	m_pController->m_pShader->setMat4("model", model);
 	m_pController->m_pShader->setMat4("view", view);
 	m_pController->m_pShader->setMat4("projection", projection);

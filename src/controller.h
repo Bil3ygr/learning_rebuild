@@ -24,7 +24,7 @@ public:
 	void clear();
 	void use();
 	void activeTexture(GLenum texture_index, int index);
-	void update();
+	void update(bool clear_color = true);
 
 private:
 	unsigned int m_nVAO = NULL;

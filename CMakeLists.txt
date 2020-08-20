@@ -56,11 +56,13 @@ set(SCENES
     ${SRC_DIR}/scene_cube.h
     ${SRC_DIR}/scene_light.h
     ${SRC_DIR}/scene_model.h
+    ${SRC_DIR}/scene_depth.h
     ${SRC_DIR}/scene_colorrect.cpp
     ${SRC_DIR}/scene_texturerect.cpp
     ${SRC_DIR}/scene_cube.cpp
     ${SRC_DIR}/scene_light.cpp
     ${SRC_DIR}/scene_model.cpp
+    ${SRC_DIR}/scene_depth.cpp
 )
 
 message(STATUS "Configuring source files and header files")

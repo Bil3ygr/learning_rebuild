@@ -142,7 +142,7 @@ void SceneLight::update(float time)
 	m_pObjectController->m_pShader->setMat4("projection", projection);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
-	m_pLightController->update();
+	m_pLightController->update(false);
 
 	model = glm::translate(model, glm::vec3(1.2f, 1.0f, 2.0f));
 	model = glm::scale(model, glm::vec3(0.2f));
