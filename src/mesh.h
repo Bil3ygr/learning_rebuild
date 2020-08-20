@@ -25,7 +25,7 @@ class Mesh
 {
 public:
 	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
-	void Update(Controller *controller);
+	void update(Controller *controller);
 
 private:
 	vector<Vertex> m_vVertices;

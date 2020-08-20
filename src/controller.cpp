@@ -80,3 +80,10 @@ void Controller::activeTexture(GLenum texture_index, int index)
 		std::cout << "texture index error: " << index << std::endl;
 	}
 }
+
+void Controller::update()
+{
+	setDepthEnable();
+	clear();
+	use();
+}

@@ -26,9 +26,7 @@ void SceneModel::update(float time)
 {
 	Camera &camera = Camera::get_instance();
 
-	m_pController->setDepthEnable();
-	m_pController->clear();
-	m_pController->use();
+	m_pController->update();
 
 	glm::mat4 projection = camera.getProjection();
 	glm::mat4 view = camera.getView();
@@ -39,5 +37,5 @@ void SceneModel::update(float time)
 	model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));		// it's a bit too big for our scene, so scale it down
 	m_pController->m_pShader->setMat4("model", model);
 
-	m_pModel->Update(m_pController);
+	m_pModel->update(m_pController);
 }

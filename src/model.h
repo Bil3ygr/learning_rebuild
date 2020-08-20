@@ -10,7 +10,7 @@ class Model
 {
 public:
 	Model(const char *path);
-	void Update(Controller *controller);
+	void update(Controller *controller);
 
 private:
 	vector<Texture> m_vTexturesLoaded;

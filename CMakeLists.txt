@@ -24,11 +24,6 @@ set(HEADER_FILES
     ${SRC_DIR}/globals.h
     ${SRC_DIR}/main.h
     ${SRC_DIR}/scene.h
-    ${SRC_DIR}/scene_colorrect.h
-    ${SRC_DIR}/scene_texturerect.h
-    ${SRC_DIR}/scene_cube.h
-    ${SRC_DIR}/scene_light.h
-    ${SRC_DIR}/scene_model.h
     ${SRC_DIR}/scenecontroller.h
     ${SRC_DIR}/scenemgr.h
     ${SRC_DIR}/shader.h
@@ -45,11 +40,6 @@ set(SOURCE_FILES
     ${SRC_DIR}/glad.c
     ${SRC_DIR}/main.cpp
     ${SRC_DIR}/scene.cpp
-    ${SRC_DIR}/scene_colorrect.cpp
-    ${SRC_DIR}/scene_texturerect.cpp
-    ${SRC_DIR}/scene_cube.cpp
-    ${SRC_DIR}/scene_light.cpp
-    ${SRC_DIR}/scene_model.cpp
     ${SRC_DIR}/scenecontroller.cpp
     ${SRC_DIR}/scenemgr.cpp
     ${SRC_DIR}/shader.cpp
@@ -60,8 +50,21 @@ set(SOURCE_FILES
     ${SRC_DIR}/model.cpp
 )
 
+set(SCENES
+    ${SRC_DIR}/scene_colorrect.h
+    ${SRC_DIR}/scene_texturerect.h
+    ${SRC_DIR}/scene_cube.h
+    ${SRC_DIR}/scene_light.h
+    ${SRC_DIR}/scene_model.h
+    ${SRC_DIR}/scene_colorrect.cpp
+    ${SRC_DIR}/scene_texturerect.cpp
+    ${SRC_DIR}/scene_cube.cpp
+    ${SRC_DIR}/scene_light.cpp
+    ${SRC_DIR}/scene_model.cpp
+)
+
 message(STATUS "Configuring source files and header files")
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES} ${SCENES})
 
 # 链接lib
 set(LIB_FILES

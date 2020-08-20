@@ -78,9 +78,8 @@ void SceneCube::update(float time)
 {
 	Camera &camera = Camera::get_instance();
 
-	m_pController->setDepthEnable();
-	m_pController->clear();
-	m_pController->use();
+	m_pController->update();
+
 	m_pController->activeTexture(GL_TEXTURE0, 0);
 	m_pController->m_pShader->setInt("texture1", 0);
 

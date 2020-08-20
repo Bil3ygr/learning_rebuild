@@ -6,10 +6,10 @@ Model::Model(const char *path)
 	loadModel(path);
 }
 
-void Model::Update(Controller *controller)
+void Model::update(Controller *controller)
 {
 	for (unsigned int i = 0; i < m_vMeshes.size(); i++)
-		m_vMeshes[i].Update(controller);
+		m_vMeshes[i].update(controller);
 }
 
 void Model::loadModel(string path)
@@ -45,7 +45,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
 	vector<Texture> textures;
-	// 顶点
+	// vertices
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex vertex;
@@ -71,14 +71,14 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		}
 		vertices.push_back(vertex);
 	}
-	// 索引
+	// indices
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 	{
 		aiFace face = mesh->mFaces[i];
 		for (unsigned int j = 0; j < face.mNumIndices; j++)
 			indices.push_back(face.mIndices[j]);
 	}
-	// 材质
+	// meterials
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];

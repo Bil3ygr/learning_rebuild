@@ -1,9 +1,9 @@
 #pragma once
 
-#include <vector>
 #include "main.h"
 #include "shader.h"
 #include "texture.h"
+#include <vector>
 
 class Controller
 {
@@ -24,6 +24,7 @@ public:
 	void clear();
 	void use();
 	void activeTexture(GLenum texture_index, int index);
+	void update();
 
 private:
 	unsigned int m_nVAO = NULL;

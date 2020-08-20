@@ -91,9 +91,8 @@ void SceneLight::update(float time)
 {
 	Camera &camera = Camera::get_instance();
 
-	m_pObjectController->setDepthEnable();
-	m_pObjectController->clear();
-	m_pObjectController->use();
+	m_pObjectController->update();
+
 	m_pObjectController->activeTexture(GL_TEXTURE1, 0);
 	m_pObjectController->activeTexture(GL_TEXTURE2, 1);
 
@@ -143,8 +142,7 @@ void SceneLight::update(float time)
 	m_pObjectController->m_pShader->setMat4("projection", projection);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
-	m_pLightController->setDepthEnable();
-	m_pLightController->use();
+	m_pLightController->update();
 
 	model = glm::translate(model, glm::vec3(1.2f, 1.0f, 2.0f));
 	model = glm::scale(model, glm::vec3(0.2f));
