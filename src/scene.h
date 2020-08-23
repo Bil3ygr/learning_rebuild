@@ -11,6 +11,6 @@ public:
 	virtual void update(float time) = 0;
 	char *getName();
 
-private:
+protected:
 	char *m_cName;
 };

@@ -13,6 +13,6 @@ public:
 	void onExit();
 	void update(float time);
 
-private:
+protected:
 	Controller *m_pController;
 };

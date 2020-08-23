@@ -29,14 +29,46 @@ int Controller::addTexture(const char *filepath)
 void Controller::setDepthEnable()
 {
 	if (m_bDepthEnable)
+	{
 		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(m_eDepthFunc);
+	}
 	else
 		glDisable(GL_DEPTH_TEST);
 }
 
-void Controller::setDepthEnable(bool enable)
+void Controller::setDepthEnable(bool enable, GLenum depthFunc)
 {
 	m_bDepthEnable = enable;
+	m_eDepthFunc = depthFunc;
+}
+
+void Controller::setStencilEnable()
+{
+	if (m_bStencilEnable)
+	{
+		glEnable(GL_STENCIL_TEST);
+		glStencilFunc(m_eStencilFunc, m_nStencilFuncRef, m_nStencilFuncMask);
+		glStencilOp(m_eStencilFuncFail, m_eStencilFuncDpFail, m_eStencilFuncDpPass);
+		glStencilMask(m_nStencilMask);
+	}
+	else
+		glDisable(GL_STENCIL_TEST);
+}
+
+void Controller::setStencilEnable(bool enable)
+{
+	m_bStencilEnable = enable;
+}
+
+void Controller::setStencilOptions(GLenum func, GLint ref, GLuint mask, GLenum sfail, GLenum dpfail, GLenum dppass)
+{
+	m_eStencilFunc = func;
+	m_nStencilFuncRef = ref;
+	m_nStencilFuncMask = mask;
+	m_eStencilFuncFail = sfail;
+	m_eStencilFuncDpFail = dpfail;
+	m_eStencilFuncDpPass = dppass;
 }
 
 void Controller::use()
@@ -54,6 +86,11 @@ void Controller::setClearColor(float r, float g, float b, float a)
 	m_bSetClearColor = true;
 }
 
+void Controller::setStencilMask(GLuint mask)
+{
+	m_nStencilMask = mask;
+}
+
 void Controller::clear()
 {
 	if (m_bSetClearColor)
@@ -62,10 +99,12 @@ void Controller::clear()
 		glClearColor(m_fClearR, m_fClearG, m_fClearB, m_fClearA);
 	}
 
+	GLbitfield mask = GL_COLOR_BUFFER_BIT;
 	if (m_bDepthEnable)
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	else
-		glClear(GL_COLOR_BUFFER_BIT);
+		mask |= GL_DEPTH_BUFFER_BIT;
+	if (m_bStencilEnable)
+		mask |= GL_STENCIL_BUFFER_BIT;
+	glClear(mask);
 }
 
 void Controller::activeTexture(GLenum texture_index, int index)
@@ -84,6 +123,7 @@ void Controller::activeTexture(GLenum texture_index, int index)
 void Controller::update(bool clear_color)
 {
 	setDepthEnable();
+	setStencilEnable();
 	if (clear_color)
 		clear();
 	use();

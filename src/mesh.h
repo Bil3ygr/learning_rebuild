@@ -27,7 +27,7 @@ public:
 	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
 	void update(Controller *controller);
 
-private:
+protected:
 	vector<Vertex> m_vVertices;
 	vector<GLuint> m_vIndices;
 	vector<Texture> m_vTextures;

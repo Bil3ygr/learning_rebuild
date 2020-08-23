@@ -28,7 +28,7 @@ public:
 	glm::vec3 getPos();
 	glm::vec3 getFront();
 
-private:
+protected:
 	Camera() {}
 
 	glm::vec3 m_vPos = glm::vec3(0, 0, 3.0f);

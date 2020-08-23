@@ -16,7 +16,7 @@ public:
 	void update(float time);
 	void clearScene();
 
-private:
+protected:
 	SceneMgr() {}
 
 	Scene *m_pScene = nullptr;

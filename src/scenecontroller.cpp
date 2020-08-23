@@ -4,6 +4,7 @@
 #include "scene_depth.h"
 #include "scene_light.h"
 #include "scene_model.h"
+#include "scene_stencil.h"
 #include "scene_texturerect.h"
 
 void createColorRect(GLFWwindow *window)
@@ -96,6 +97,21 @@ void createDepth(GLFWwindow *window)
 	}
 }
 
+void createStencil(GLFWwindow *window)
+{
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	char *name = "Stencil";
+	SceneMgr &mgr = SceneMgr::get_instance();
+	Scene *current_scene = mgr.getCurrentScene();
+
+	if (current_scene == nullptr || strcmp(current_scene->getName(), name) != 0)
+	{
+		SceneStencil *scene = new SceneStencil(name);
+		mgr.setScene((Scene *)scene);
+	}
+}
+
 void switchScene(GLFWwindow *window)
 {
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
@@ -110,4 +126,6 @@ void switchScene(GLFWwindow *window)
 		createModel(window);
 	else if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
 		createDepth(window);
+	else if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+		createStencil(window);
 }

@@ -16,12 +16,19 @@ void SceneDepth::onEnter()
     // m_pCubeController = new Controller("shader/cubevs.glsl", "shader/depthfs.glsl");
     m_pCubeController->addTexture("res/marble.jpg");
     m_pCubeController->setDepthEnable(true);
+    m_pCubeController->setStencilEnable(true);
     m_pCubeController->setClearColor(0.1f, 0.1f, 0.1f);
+    m_pCubeController->setStencilOptions(GL_ALWAYS, 1, 0xff, GL_KEEP, GL_KEEP, GL_REPLACE);
+    m_pCubeController->setStencilMask(0xff);
 
     m_pPlaneController = new Controller("shader/cubevs.glsl", "shader/texfs.glsl");
     // m_pPlaneController = new Controller("shader/cubevs.glsl", "shader/depthfs.glsl");
     m_pPlaneController->addTexture("res/metal.png");
     m_pPlaneController->setDepthEnable(true);
+    m_pPlaneController->setStencilEnable(true);
+    m_pPlaneController->setClearColor(0.1f, 0.1f, 0.1f);
+    m_pPlaneController->setStencilOptions(GL_ALWAYS, 0, 0xff, GL_KEEP, GL_KEEP, GL_REPLACE);
+    m_pPlaneController->setStencilMask(0xff);
 
     float cubeVertices[] = {
         // positions          // texture Coords
@@ -97,32 +104,32 @@ void SceneDepth::update(float time)
 {
     Camera &camera = Camera::get_instance();
 
-    m_pCubeController->update();
-
-    m_pCubeController->activeTexture(GL_TEXTURE0, 0);
-    m_pCubeController->m_pShader->setInt("texture1", 0);
-
+    glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = camera.getView();
     glm::mat4 projection = camera.getProjection();
-    m_pCubeController->m_pShader->setMat4("view", view);
-    m_pCubeController->m_pShader->setMat4("projection", projection);
 
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
-    m_pCubeController->m_pShader->setMat4("model", model);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-    m_pCubeController->m_pShader->setMat4("model", model);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-
-    m_pPlaneController->update(false);
+    // plane
+    m_pPlaneController->update();
 
     m_pPlaneController->activeTexture(GL_TEXTURE0, 0);
     m_pPlaneController->m_pShader->setInt("texture1", 0);
+    m_pPlaneController->m_pShader->setMat4("model", model);
     m_pPlaneController->m_pShader->setMat4("view", view);
     m_pPlaneController->m_pShader->setMat4("projection", projection);
-
-    m_pCubeController->m_pShader->setMat4("model", glm::mat4(1.0f));
     glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    // cubes
+    m_pCubeController->update(false);
+
+    m_pCubeController->activeTexture(GL_TEXTURE0, 0);
+    m_pCubeController->m_pShader->setInt("texture1", 0);
+    m_pCubeController->m_pShader->setMat4("view", view);
+    m_pCubeController->m_pShader->setMat4("projection", projection);
+
+    model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, -1.0f));
+    m_pCubeController->m_pShader->setMat4("model", model);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    model = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f));
+    m_pCubeController->m_pShader->setMat4("model", model);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 }

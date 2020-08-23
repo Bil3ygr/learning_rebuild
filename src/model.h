@@ -12,7 +12,7 @@ public:
 	Model(const char *path);
 	void update(Controller *controller);
 
-private:
+protected:
 	vector<Texture> m_vTexturesLoaded;
 	vector<Mesh> m_vMeshes;
 	string m_sDirectory;

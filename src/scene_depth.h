@@ -13,7 +13,7 @@ public:
 	void onExit();
 	void update(float time);
 
-private:
+protected:
 	Controller *m_pCubeController;
 	Controller *m_pPlaneController;
 };
