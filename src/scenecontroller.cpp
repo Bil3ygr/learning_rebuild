@@ -4,7 +4,6 @@
 #include "scene_depth.h"
 #include "scene_light.h"
 #include "scene_model.h"
-#include "scene_stencil.h"
 #include "scene_texturerect.h"
 
 void createColorRect(GLFWwindow *window)
@@ -97,18 +96,29 @@ void createDepth(GLFWwindow *window)
 	}
 }
 
-void createStencil(GLFWwindow *window)
+void switchDepthStencil()
 {
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-	char *name = "Stencil";
+	char *name = "Depth";
 	SceneMgr &mgr = SceneMgr::get_instance();
 	Scene *current_scene = mgr.getCurrentScene();
 
-	if (current_scene == nullptr || strcmp(current_scene->getName(), name) != 0)
+	if (current_scene != nullptr && strcmp(current_scene->getName(), name) == 0)
 	{
-		SceneStencil *scene = new SceneStencil(name);
-		mgr.setScene((Scene *)scene);
+		SceneDepth *scene = static_cast<SceneDepth *>(current_scene);
+		scene->switchStencilEnable();
+	}
+}
+
+void switchDepthBlend()
+{
+	char *name = "Depth";
+	SceneMgr &mgr = SceneMgr::get_instance();
+	Scene *current_scene = mgr.getCurrentScene();
+
+	if (current_scene != nullptr && strcmp(current_scene->getName(), name) == 0)
+	{
+		SceneDepth *scene = static_cast<SceneDepth *>(current_scene);
+		scene->switchBlendEnable();
 	}
 }
 
@@ -126,6 +136,8 @@ void switchScene(GLFWwindow *window)
 		createModel(window);
 	else if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
 		createDepth(window);
-	else if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
-		createStencil(window);
+	else if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
+		switchDepthStencil();
+	else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
+		switchDepthBlend();
 }

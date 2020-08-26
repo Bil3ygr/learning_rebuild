@@ -2,7 +2,6 @@
 
 #include "controller.h"
 #include "scene.h"
-#include <vector>
 
 class SceneDepth : public Scene
 {
@@ -14,10 +13,27 @@ public:
 	void onExit();
 	void update(float time);
 
-protected:
-	Controller *m_pCubeController;
-	Controller *m_pPlaneController;
-	Controller *m_pGrassController;
+	void switchStencilEnable();
+	void switchBlendEnable();
 
-	std::vector<glm::vec3> m_vVegetation;
+protected:
+	void initPlaneController();
+	void drawPlane();
+	void initCubesController();
+	void drawCubes();
+	void initStencilsController();
+	void drawStencils();
+	void initGrassesController();
+	void drawGrasses();
+	void initWindowsController();
+	void drawWindows();
+
+	Controller *m_pPlaneController;
+	Controller *m_pCubesController;
+	Controller *m_pStencilsController;
+	Controller *m_pGrassesController;
+	Controller *m_pWindowsController;
+
+	std::vector<glm::vec3> m_vPositions;
+	bool m_bStencilEnable = false, m_bBlendEnable = false;
 };

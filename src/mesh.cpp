@@ -7,7 +7,7 @@ Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> text
 	m_nVAO = createVertexInfo(
 		&m_vVertices[0], m_vVertices.size() * sizeof(Vertex),
 		pointers, sizeof(pointers) / sizeof(pointers[0]), enables,
-		&m_vIndices[0], (int)m_vIndices.size() * sizeof(GLuint));
+		&m_vIndices[0], (int)(m_vIndices.size() * sizeof(GLuint)));
 }
 
 void Mesh::update(Controller *controller)

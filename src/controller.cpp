@@ -26,6 +26,19 @@ int Controller::addTexture(const char *filepath)
 	return (int)(m_lTexture.size() - 1);
 }
 
+void Controller::activeTexture(GLenum texture_index, int index)
+{
+	if (index >= 0 && index < m_lTexture.size())
+	{
+		glActiveTexture(texture_index);
+		glBindTexture(GL_TEXTURE_2D, m_lTexture[index]);
+	}
+	else
+	{
+		std::cout << "texture index error: " << index << std::endl;
+	}
+}
+
 void Controller::setDepthEnable()
 {
 	if (m_bDepthEnable)
@@ -71,10 +84,51 @@ void Controller::setStencilOptions(GLenum func, GLint ref, GLuint mask, GLenum s
 	m_eStencilFuncDpPass = dppass;
 }
 
-void Controller::use()
+void Controller::setStencilMask(GLuint mask)
 {
-	m_pShader->use();
-	glBindVertexArray(m_nVAO);
+	m_nStencilMask = mask;
+}
+
+void Controller::setBlendEnable()
+{
+	if (m_bBlendEnable)
+	{
+		glEnable(GL_BLEND);
+		if (m_eBlendSrcFactorRGB == NULL)
+		{
+			glBlendFunc(m_eBlendSrcFactorA, m_eBlendDstFactorA);
+			glBlendEquation(m_eBlendModeA);
+		}
+		else
+		{
+			glBlendFuncSeparate(m_eBlendSrcFactorRGB, m_eBlendDstFactorRGB, m_eBlendSrcFactorA, m_eBlendDstFactorA);
+			glBlendEquationSeparate(m_eBlendModeRGB, m_eBlendModeA);
+		}
+	}
+	else
+		glDisable(GL_BLEND);
+}
+
+void Controller::setBlendEnable(bool enable)
+{
+	m_bBlendEnable = enable;
+}
+
+void Controller::setBlendOptions(GLenum sfactor, GLenum dfactor, GLenum mode)
+{
+	m_eBlendSrcFactorA = sfactor;
+	m_eBlendDstFactorA = dfactor;
+	m_eBlendModeA = mode;
+}
+
+void Controller::setBlendOptions(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorA, GLenum dfactorA, GLenum modeRBG, GLenum modeA)
+{
+	m_eBlendSrcFactorRGB = sfactorRGB;
+	m_eBlendDstFactorRGB = dfactorRGB;
+	m_eBlendSrcFactorA = sfactorA;
+	m_eBlendDstFactorA = dfactorA;
+	m_eBlendModeRGB = modeRBG;
+	m_eBlendModeA = modeA;
 }
 
 void Controller::setClearColor(float r, float g, float b, float a)
@@ -84,11 +138,6 @@ void Controller::setClearColor(float r, float g, float b, float a)
 	m_fClearB = b;
 	m_fClearA = a;
 	m_bSetClearColor = true;
-}
-
-void Controller::setStencilMask(GLuint mask)
-{
-	m_nStencilMask = mask;
 }
 
 void Controller::clear()
@@ -107,24 +156,20 @@ void Controller::clear()
 	glClear(mask);
 }
 
-void Controller::activeTexture(GLenum texture_index, int index)
+void Controller::use()
 {
-	if (index >= 0 && index < m_lTexture.size())
-	{
-		glActiveTexture(texture_index);
-		glBindTexture(GL_TEXTURE_2D, m_lTexture[index]);
-	}
-	else
-	{
-		std::cout << "texture index error: " << index << std::endl;
-	}
+	m_pShader->use();
+	glBindVertexArray(m_nVAO);
 }
 
 void Controller::update(bool clear_color)
 {
 	setDepthEnable();
 	setStencilEnable();
+	setBlendEnable();
+
 	if (clear_color)
 		clear();
+
 	use();
 }
