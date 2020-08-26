@@ -2,6 +2,7 @@
 
 #include "controller.h"
 #include "scene.h"
+#include <vector>
 
 class SceneDepth : public Scene
 {
@@ -16,4 +17,7 @@ public:
 protected:
 	Controller *m_pCubeController;
 	Controller *m_pPlaneController;
+	Controller *m_pGrassController;
+
+	std::vector<glm::vec3> m_vVegetation;
 };

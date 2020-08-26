@@ -5,6 +5,7 @@ SceneDepth::~SceneDepth()
 {
     delete m_pCubeController;
     delete m_pPlaneController;
+    delete m_pGrassController;
 }
 
 void SceneDepth::onEnter()
@@ -29,6 +30,10 @@ void SceneDepth::onEnter()
     m_pPlaneController->setClearColor(0.1f, 0.1f, 0.1f);
     m_pPlaneController->setStencilOptions(GL_ALWAYS, 0, 0xff, GL_KEEP, GL_KEEP, GL_REPLACE);
     m_pPlaneController->setStencilMask(0xff);
+
+    m_pGrassController = new Controller("shader/cubevs.glsl", "shader/texfs.glsl");
+    m_pGrassController->addTexture("res/grass.png");
+    m_pGrassController->setDepthEnable(true);
 
     float cubeVertices[] = {
         // positions          // texture Coords
@@ -84,6 +89,16 @@ void SceneDepth::onEnter()
         -5.0f, -0.5f, -5.0f, 0.0f, 2.0f,
         5.0f, -0.5f, -5.0f, 2.0f, 2.0f};
 
+    float transparentVertices[] = {
+        // positions         // texture Coords (swapped y coordinates because texture is flipped upside down)
+        0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
+        0.0f, -0.5f, 0.0f, 0.0f, 1.0f,
+        1.0f, -0.5f, 0.0f, 1.0f, 1.0f,
+
+        0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
+        1.0f, -0.5f, 0.0f, 1.0f, 1.0f,
+        1.0f, 0.5f, 0.0f, 1.0f, 0.0f};
+
     int pointers[] = {3, 2};
     bool pointer_enable[] = {true, true};
 
@@ -94,6 +109,17 @@ void SceneDepth::onEnter()
     m_pPlaneController->setVertexInfo(
         planeVertices, sizeof(planeVertices),
         pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+
+    m_pGrassController->setVertexInfo(
+        transparentVertices, sizeof(transparentVertices),
+        pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+
+    m_vVegetation.clear();
+    m_vVegetation.push_back(glm::vec3(-1.5f, 0.0f, -0.48f));
+    m_vVegetation.push_back(glm::vec3(1.5f, 0.0f, 0.51f));
+    m_vVegetation.push_back(glm::vec3(0.0f, 0.0f, 0.7f));
+    m_vVegetation.push_back(glm::vec3(-0.3f, 0.0f, -2.3f));
+    m_vVegetation.push_back(glm::vec3(0.5f, 0.0f, -0.6f));
 }
 
 void SceneDepth::onExit()
@@ -117,6 +143,21 @@ void SceneDepth::update(float time)
     m_pPlaneController->m_pShader->setMat4("view", view);
     m_pPlaneController->m_pShader->setMat4("projection", projection);
     glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    m_pGrassController->update(false);
+
+    m_pGrassController->activeTexture(GL_TEXTURE0, 0);
+    m_pGrassController->activeTexture(GL_TEXTURE0, 0);
+    m_pGrassController->m_pShader->setInt("texture1", 0);
+    m_pGrassController->m_pShader->setMat4("view", view);
+    m_pGrassController->m_pShader->setMat4("projection", projection);
+
+    for (int i = 0; i < m_vVegetation.size(); i++)
+    {
+        model = glm::translate(glm::mat4(1.0f), m_vVegetation[i]);
+        m_pGrassController->m_pShader->setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+    }
 
     // cubes
     m_pCubeController->update(false);

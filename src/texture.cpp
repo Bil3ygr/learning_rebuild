@@ -3,28 +3,26 @@
 
 unsigned int create2DTextureFromData(
 	ImageData data,
-	GLenum swrap,
-	GLenum twrap,
-	GLenum minfilter,
-	GLenum maxfilter,
-	float *borderColor,
-	bool useMipmap)
+	bool useMipmap,
+	float *borderColor)
 {
 	unsigned int texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	// »·ÈÆ·½Ê½
+	// ç¯ç»•æ–¹å¼
+	GLint swrap = data.getWrapS();
+	GLint twrap = data.getWrapT();
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, swrap);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, twrap);
 	//for GL_CLAMP_TO_BORDER
 	if (swrap == GL_CLAMP_TO_BORDER || twrap == GL_CLAMP_TO_BORDER)
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-	// ÎÆÀí¹ıÂË, Mipmap
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minfilter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, maxfilter);
-	// Éú³É
+	// çº¹ç†è¿‡æ»¤, Mipmap
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, data.getMinFilter());
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, data.getMaxFilter());
+	// ç”Ÿæˆ
 	glTexImage2D(GL_TEXTURE_2D, 0, data.colorType, data.width, data.height, 0, data.colorType, GL_UNSIGNED_BYTE, data.data);
-	// Èç¹ûfilterÓĞÉèÖÃmipmap£¬ÒªÉú³É£¬·ñÔò¿´²»µ½
+	// å¦‚æœfilteræœ‰è®¾ç½®mipmapï¼Œè¦ç”Ÿæˆï¼Œå¦åˆ™çœ‹ä¸åˆ°
 	if (useMipmap)
 		glGenerateMipmap(GL_TEXTURE_2D);
 	return texture;
@@ -36,7 +34,7 @@ unsigned int create2DTextureFromFile(const char *filepath, const std::string &di
 	if (!directory.empty())
 		filename = directory + "/" + filename;
 	unsigned int texture = NULL;
-	// ¼ÓÔØ²¢Éú³É
+	// åŠ è½½å¹¶ç”Ÿæˆ
 	int width, height, nrChannels;
 	unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
 	if (data)
