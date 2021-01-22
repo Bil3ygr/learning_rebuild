@@ -68,6 +68,9 @@ void SceneCube::onEnter()
 	m_pController->setVertexInfo(
 		vertices, sizeof(vertices),
 		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+
+	m_pController->activeTexture(GL_TEXTURE0, 0);
+	m_pController->m_pShader->setInt("texture1", 0);
 }
 
 void SceneCube::onExit()
@@ -80,16 +83,12 @@ void SceneCube::update(float time)
 
 	m_pController->update();
 
-	m_pController->activeTexture(GL_TEXTURE0, 0);
-	m_pController->m_pShader->setInt("texture1", 0);
-
 	glm::mat4 model = glm::mat4(1.0f);
 	// model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-	glm::mat4 view = camera.getView();
-	glm::mat4 projection = camera.getProjection();
 	m_pController->m_pShader->setMat4("model", model);
-	m_pController->m_pShader->setMat4("view", view);
-	m_pController->m_pShader->setMat4("projection", projection);
+	m_pController->m_pShader->setMat4("view", camera.getView());
+	m_pController->m_pShader->setMat4("projection", camera.getProjection());
+
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 }

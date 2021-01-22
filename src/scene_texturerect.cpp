@@ -36,6 +36,9 @@ void SceneTextureRect::onEnter()
 		vertices, sizeof(vertices),
 		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable,
 		indices, sizeof(indices));
+
+	m_pController->activeTexture(GL_TEXTURE0, 0);
+	m_pController->m_pShader->setInt("texture1", 0);
 }
 
 void SceneTextureRect::onExit()
@@ -46,13 +49,11 @@ void SceneTextureRect::update(float time)
 {
 	m_pController->update();
 
-	m_pController->activeTexture(GL_TEXTURE0, 0);
-	m_pController->m_pShader->setInt("texture1", 0);
-
 	glm::mat4 trans = glm::mat4(1.0f);
 	trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 	float scale = abs((float)sin(glfwGetTime()));
 	trans = glm::scale(trans, glm::vec3(scale, scale, scale));
 	m_pController->m_pShader->setMat4("transform", trans);
+
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

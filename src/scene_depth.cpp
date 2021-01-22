@@ -154,6 +154,9 @@ void SceneDepth::initPlaneController()
 	m_pPlaneController->setDepthEnable(true);
 	m_pPlaneController->setStencilEnable(true);
 	m_pPlaneController->setStencilOptions(GL_ALWAYS, 0, 0xff, GL_KEEP, GL_KEEP, GL_REPLACE);
+
+	m_pPlaneController->activeTexture(GL_TEXTURE0, 0);
+	m_pPlaneController->m_pShader->setInt("texture1", 0);
 }
 
 void SceneDepth::drawPlane()
@@ -162,8 +165,6 @@ void SceneDepth::drawPlane()
 
 	// plane
 	m_pPlaneController->update();
-	m_pPlaneController->activeTexture(GL_TEXTURE0, 0);
-	m_pPlaneController->m_pShader->setInt("texture1", 0);
 	m_pPlaneController->m_pShader->setMat4("model", glm::mat4(1.0f));
 	m_pPlaneController->m_pShader->setMat4("view", camera.getView());
 	m_pPlaneController->m_pShader->setMat4("projection", camera.getProjection());
@@ -178,6 +179,9 @@ void SceneDepth::initCubesController()
 	m_pCubesController->setDepthEnable(true);
 	m_pCubesController->setStencilEnable(true);
 	m_pCubesController->setStencilOptions(GL_ALWAYS, 1, 0xff, GL_KEEP, GL_KEEP, GL_REPLACE);
+
+	m_pCubesController->activeTexture(GL_TEXTURE0, 0);
+	m_pCubesController->m_pShader->setInt("texture1", 0);
 }
 
 void SceneDepth::drawCubes()
@@ -186,8 +190,6 @@ void SceneDepth::drawCubes()
 	glm::mat4 model;
 
 	m_pCubesController->update(false);
-	m_pCubesController->activeTexture(GL_TEXTURE0, 0);
-	m_pCubesController->m_pShader->setInt("texture1", 0);
 	m_pCubesController->m_pShader->setMat4("view", camera.getView());
 	m_pCubesController->m_pShader->setMat4("projection", camera.getProjection());
 
@@ -207,6 +209,10 @@ void SceneDepth::initStencilsController()
 	m_pStencilsController->setStencilEnable(true);
 	m_pStencilsController->setStencilOptions(GL_NOTEQUAL, 1, 0xff, GL_KEEP, GL_KEEP, GL_REPLACE);
 	m_pStencilsController->setStencilMask(0x00);
+
+	m_pStencilsController->activeTexture(GL_TEXTURE0, 0);
+	m_pStencilsController->m_pShader->setInt("texture1", 0);
+	m_pStencilsController->m_pShader->setVec4("stencilColor", 0.04f, 0.28f, 0.26f, 1.0f);
 }
 
 void SceneDepth::drawStencils()
@@ -216,9 +222,6 @@ void SceneDepth::drawStencils()
 	float scale = 1.1f;
 
 	m_pStencilsController->update(false);
-	m_pStencilsController->activeTexture(GL_TEXTURE0, 0);
-	m_pStencilsController->m_pShader->setInt("texture1", 0);
-	m_pStencilsController->m_pShader->setVec4("stencilColor", 0.04f, 0.28f, 0.26f, 1.0f);
 	m_pStencilsController->m_pShader->setMat4("view", camera.getView());
 	m_pStencilsController->m_pShader->setMat4("projection", camera.getProjection());
 
@@ -238,6 +241,10 @@ void SceneDepth::initGrassesController()
 	m_pGrassesController->addTexture("res/grass.png");
 	m_pGrassesController->setDepthEnable(true);
 	m_pGrassesController->setBlendEnable(true);
+
+	m_pGrassesController->activeTexture(GL_TEXTURE0, 0);
+	m_pGrassesController->m_pShader->setInt("texture1", 0);
+	m_pGrassesController->m_pShader->setFloat("alpha", 0.1f);
 }
 
 void SceneDepth::drawGrasses()
@@ -246,9 +253,6 @@ void SceneDepth::drawGrasses()
 	glm::mat4 model;
 
 	m_pGrassesController->update(false);
-	m_pGrassesController->activeTexture(GL_TEXTURE0, 0);
-	m_pGrassesController->m_pShader->setInt("texture1", 0);
-	m_pGrassesController->m_pShader->setFloat("alpha", 0.1f);
 	m_pGrassesController->m_pShader->setMat4("view", camera.getView());
 	m_pGrassesController->m_pShader->setMat4("projection", camera.getProjection());
 
@@ -274,6 +278,9 @@ void SceneDepth::initWindowsController()
 	m_pWindowsController->addTexture("res/window.png");
 	m_pWindowsController->setDepthEnable(true);
 	m_pWindowsController->setBlendEnable(true);
+
+	m_pWindowsController->activeTexture(GL_TEXTURE0, 0);
+	m_pWindowsController->m_pShader->setInt("texture1", 0);
 }
 
 void SceneDepth::drawWindows()
@@ -282,8 +289,6 @@ void SceneDepth::drawWindows()
 	glm::mat4 model;
 
 	m_pWindowsController->update(false);
-	m_pWindowsController->activeTexture(GL_TEXTURE0, 0);
-	m_pWindowsController->m_pShader->setInt("texture1", 0);
 	m_pWindowsController->m_pShader->setMat4("view", camera.getView());
 	m_pWindowsController->m_pShader->setMat4("projection", camera.getProjection());
 

@@ -81,6 +81,12 @@ void SceneLight::onEnter()
 	m_pLightController->setVertexInfo(
 		vertices, sizeof(vertices),
 		pointers, sizeof(pointers) / sizeof(pointers[0]), light_pointer_enable);
+
+	m_pObjectController->activeTexture(GL_TEXTURE1, 0);
+	m_pObjectController->activeTexture(GL_TEXTURE2, 1);
+	m_pObjectController->m_pShader->setInt("material.diffuse", 1);
+	m_pObjectController->m_pShader->setInt("material.specular", 2);
+	m_pObjectController->m_pShader->setFloat("material.shininess", 64.0f);
 }
 
 void SceneLight::onExit()
@@ -93,9 +99,6 @@ void SceneLight::update(float time)
 
 	m_pObjectController->update();
 
-	m_pObjectController->activeTexture(GL_TEXTURE1, 0);
-	m_pObjectController->activeTexture(GL_TEXTURE2, 1);
-
 	m_pObjectController->m_pShader->setVec3("viewPos", camera.getPos());
 	m_pObjectController->m_pShader->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
 	//m_pObjectController->m_pShader->setVec3("lightColor", 1.0f, 1.0f, 1.0f);
@@ -105,9 +108,6 @@ void SceneLight::update(float time)
 	//m_pObjectController->m_pShader->setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
 	//m_pObjectController->m_pShader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
 
-	m_pObjectController->m_pShader->setInt("material.diffuse", 1);
-	m_pObjectController->m_pShader->setInt("material.specular", 2);
-	m_pObjectController->m_pShader->setFloat("material.shininess", 64.0f);
 	//// light
 	//m_pObjectController->m_pShader->setInt("light.type", 1);
 	//m_pObjectController->m_pShader->setVec3("light.direction", -0.2f, -1.0f, -0.3f);

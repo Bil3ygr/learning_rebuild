@@ -47,14 +47,14 @@ void main()
 	//vec3 viewDir = normalize(viewPos - fragPos);
 	//vec3 reflectDir = reflect(-lightDir, norm);
 	//float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-	
+
 	//vec3 result = (ambient + diffuse + spec) * objectColor;
 	//FragColor = vec4(result, 1.0);
 
-	// »·¾³¹â
+	// ç¯å¢ƒå…‰
 	//vec3 ambient = light.ambient * material.ambient;
 	vec3 ambient = light.ambient * vec3(texture(material.diffuse, fragTexCoords));
-	// Âş·´Éä
+	// æ¼«åå°„
 	vec3 norm = normalize(fragNormal);
 	vec3 lightDir;
 	if (light.type == 1)
@@ -63,9 +63,9 @@ void main()
 		lightDir = normalize(light.position - fragPos);
 	float diff = max(dot(norm, lightDir), 0.0);
 	//vec3 diffuse = light.diffuse * (diff * material.diffuse);
-	// Âş·´ÉäÌùÍ¼
+	// æ¼«åå°„è´´å›¾
 	vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, fragTexCoords));
-	//¾µÃæ¹â
+	//é•œé¢å…‰
 	vec3 viewDir = normalize(viewPos - fragPos);
 	vec3 reflectDir = reflect(-lightDir, norm);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
