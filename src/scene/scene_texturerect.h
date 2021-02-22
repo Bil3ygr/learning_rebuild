@@ -1,13 +1,13 @@
 #pragma once
 
 #include "scene.h"
-#include "controller.h"
+#include "../controller.h"
 
-class SceneCube : public Scene
+class SceneTextureRect : public Scene
 {
 public:
-	SceneCube(char *name) : Scene(name) {}
-	~SceneCube();
+	SceneTextureRect(char *name) : Scene(name) {}
+	~SceneTextureRect();
 
 	void onEnter();
 	void onExit();

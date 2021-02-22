@@ -3,10 +3,8 @@
 Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures) : m_vVertices(vertices), m_vIndices(indices), m_vTextures(textures)
 {
 	int pointers[] = {3, 3, 2};
-	bool enables[] = {true, true, true};
 	m_nVAO = createVertexInfo(
-		&m_vVertices[0], m_vVertices.size() * sizeof(Vertex),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), enables,
+		&m_vVertices[0], m_vVertices.size() * sizeof(Vertex), pointers,
 		&m_vIndices[0], (int)(m_vIndices.size() * sizeof(GLuint)));
 }
 

@@ -100,18 +100,18 @@ void mainloop()
 
 int main()
 {
-	float width = 800, height = 600;
-	if (!initGLFW(width, height))
-	{
-		glfwTerminate();
-		return -1;
-	}
+	 float width = 800, height = 600;
+	 if (!initGLFW(width, height))
+	 {
+	 	glfwTerminate();
+	 	return -1;
+	 }
 
-	initCamera(width, height, 45.0f, 0.1f, 100.0f);
+	 initCamera(width, height, 45.0f, 0.1f, 100.0f);
 
-	mainloop();
+	 mainloop();
 
-	glfwTerminate();
+	 glfwTerminate();
 
 	return 0;
 }

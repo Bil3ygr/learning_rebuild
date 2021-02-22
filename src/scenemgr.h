@@ -1,7 +1,7 @@
 #pragma once
 
 #include "main.h"
-#include "scene.h"
+#include "scene/scene.h"
 
 class SceneMgr
 {

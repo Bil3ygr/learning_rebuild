@@ -1,5 +1,5 @@
 #include "scene_light.h"
-#include "camera.h"
+#include "../camera.h"
 
 SceneLight::~SceneLight()
 {
@@ -68,19 +68,12 @@ void SceneLight::onEnter()
 	int pointers[] = {
 		3, 3, 2};
 
-	bool object_pointer_enable[] = {
-		true, true, true};
-
 	bool light_pointer_enable[] = {
 		true, false, false};
 
-	m_pObjectController->setVertexInfo(
-		vertices, sizeof(vertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), object_pointer_enable);
+	m_pObjectController->setVertexInfo(vertices, pointers);
 
-	m_pLightController->setVertexInfo(
-		vertices, sizeof(vertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), light_pointer_enable);
+	m_pLightController->setVertexInfo(vertices, pointers, nullptr, light_pointer_enable);
 
 	m_pObjectController->activeTexture(GL_TEXTURE1, 0);
 	m_pObjectController->activeTexture(GL_TEXTURE2, 1);

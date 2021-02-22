@@ -13,10 +13,8 @@ public:
 	Controller(const char *vsfile, const char *fsfile, const char *gsfile = nullptr);
 	~Controller();
 
-	void setVertexInfo(
-		float *vertices, int vertices_size,
-		int *pointers, int pointer_count, bool *pointer_enable,
-		int *indices = nullptr, int indices_size = NULL);
+	void setVertexInfo(float *vertices, int *pointers, int *indices = nullptr,
+					   bool *pointer_enable = nullptr);
 
 	int addTexture(const char *filepath);
 	void activeTexture(GLenum texture_index, int index);
@@ -62,3 +60,10 @@ protected:
 	GLenum m_eBlendSrcFactorRGB = NULL, m_eBlendDstFactorRGB = NULL;
 	GLenum m_eBlendModeRGB = GL_FUNC_ADD, m_eBlendModeA = GL_FUNC_ADD;
 };
+
+GLuint createVertexInfo(float *vertices, int *pointers, int *indices = nullptr,
+						bool *pointer_enable = nullptr);
+
+GLuint createVertexInfo(const void *vertices, int vertices_size, int *pointers,
+						const void *indices = nullptr, int indices_size = 0,
+						bool *pointer_enable = nullptr);

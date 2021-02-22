@@ -1,5 +1,5 @@
 #include "scene_texturerect.h"
-#include "camera.h"
+#include "../camera.h"
 
 SceneTextureRect::~SceneTextureRect()
 {
@@ -25,17 +25,11 @@ void SceneTextureRect::onEnter()
 	int pointers[] = {
 		3, 3, 2};
 
-	bool pointer_enable[] = {
-		true, true, true};
-
 	int indices[] = {
 		0, 1, 3,
 		1, 2, 3};
 
-	m_pController->setVertexInfo(
-		vertices, sizeof(vertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable,
-		indices, sizeof(indices));
+	m_pController->setVertexInfo(vertices, pointers, indices);
 
 	m_pController->activeTexture(GL_TEXTURE0, 0);
 	m_pController->m_pShader->setInt("texture1", 0);

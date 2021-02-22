@@ -1,7 +1,7 @@
 #pragma once
 
-#include "controller.h"
-#include "model.h"
+#include "../controller.h"
+#include "../model.h"
 #include "scene.h"
 
 class SceneModel : public Scene

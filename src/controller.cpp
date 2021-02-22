@@ -12,12 +12,9 @@ Controller::~Controller()
 	glBindVertexArray(0);
 }
 
-void Controller::setVertexInfo(
-	float *vertices, int vertices_size,
-	int *pointers, int pointer_count, bool *pointer_enable,
-	int *indices, int indices_size)
+void Controller::setVertexInfo(float *vertices, int *pointers, int *indices, bool *pointer_enable)
 {
-	m_nVAO = createVertexInfo(vertices, vertices_size, pointers, pointer_count, pointer_enable, indices, indices_size);
+	m_nVAO = createVertexInfo(vertices, pointers, indices, pointer_enable);
 }
 
 int Controller::addTexture(const char *filepath)
@@ -172,4 +169,55 @@ void Controller::update(bool clear_color)
 		clear();
 
 	use();
+}
+
+GLuint createVertexInfo(float *vertices, int *pointers, int *indices,
+						bool *pointer_enable)
+{
+	return createVertexInfo(vertices, sizeof(vertices), pointers,
+							indices, sizeof(indices), pointer_enable);
+}
+GLuint createVertexInfo(const void *vertices, int vertices_size, int *pointers,
+						const void *indices, int indices_size, bool *pointer_enable)
+{
+	GLuint VAO, VBO, EBO = NULL;
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	// 绑定顶点数组
+	glBindVertexArray(VAO);
+	// 绑定顶点缓存
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices_size, vertices, GL_STATIC_DRAW);
+	// 绑定索引信息
+	if (indices)
+	{
+		glGenBuffers(1, &EBO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices_size, indices, GL_STATIC_DRAW);
+	}
+	// 设置顶点读取信息
+	int pointer_count = sizeof(pointers) / sizeof(pointers[0]);
+	int total = 0;
+	for (int i = 0; i < pointer_count; i++)
+		total += pointers[i];
+	int offset = 0;
+	for (int i = 0; i < pointer_count; i++)
+	{
+		if (!pointer_enable || pointer_enable[i])
+		{
+			glVertexAttribPointer(
+				i, pointers[i], GL_FLOAT, GL_FALSE, total * sizeof(float),
+				(void *)(offset * sizeof(float)));
+			glEnableVertexAttribArray(i);
+		}
+		offset += pointers[i];
+	}
+	// 清空
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+	// 删除
+	glDeleteBuffers(1, &VBO);
+	if (indices)
+		glDeleteBuffers(1, &EBO);
+	return VAO;
 }

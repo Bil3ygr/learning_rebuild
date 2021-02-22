@@ -1,5 +1,5 @@
 #include "scene_colorrect.h"
-#include "camera.h"
+#include "../camera.h"
 
 SceneColorRect::~SceneColorRect()
 {
@@ -23,17 +23,11 @@ void SceneColorRect::onEnter()
 	int pointers[] = {
 		3, 3};
 
-	bool pointer_enable[] = {
-		true, true};
-
 	int indices[] = {
 		0, 2, 3,
 		0, 1, 2};
 
-	m_pController->setVertexInfo(
-		vertices, sizeof(vertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable,
-		indices, sizeof(indices));
+	m_pController->setVertexInfo(vertices, pointers, indices);
 }
 
 void SceneColorRect::onExit()

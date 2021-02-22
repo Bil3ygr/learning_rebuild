@@ -1,5 +1,5 @@
 #include "scene_cube.h"
-#include "camera.h"
+#include "../camera.h"
 
 SceneCube::~SceneCube()
 {
@@ -62,12 +62,7 @@ void SceneCube::onEnter()
 	int pointers[] = {
 		3, 2};
 
-	bool pointer_enable[] = {
-		true, true};
-
-	m_pController->setVertexInfo(
-		vertices, sizeof(vertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+	m_pController->setVertexInfo(vertices, pointers);
 
 	m_pController->activeTexture(GL_TEXTURE0, 0);
 	m_pController->m_pShader->setInt("texture1", 0);

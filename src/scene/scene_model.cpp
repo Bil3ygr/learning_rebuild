@@ -1,5 +1,5 @@
 #include "scene_model.h"
-#include "camera.h"
+#include "../camera.h"
 
 SceneModel::~SceneModel()
 {

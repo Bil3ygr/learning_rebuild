@@ -32,7 +32,3 @@ protected:
 GLuint createShader(GLenum shaderType, const char *shaderSource);
 GLuint createProgram(GLuint vs, GLuint fs, GLuint gs = NULL);
 GLuint createProgram(const char *vsfile, const char *fsfile, const char *gsfile = nullptr);
-GLuint createVertexInfo(
-	const void *vertices, int vertices_size,
-	int *pointers, int pointer_count, bool *pointer_enable,
-	const void *indices = nullptr, int indices_size = 0);

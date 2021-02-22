@@ -1,6 +1,6 @@
 #pragma once
 
-#include "controller.h"
+#include "../controller.h"
 #include "scene.h"
 
 class SceneDepth : public Scene

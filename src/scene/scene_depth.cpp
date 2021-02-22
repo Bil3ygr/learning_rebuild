@@ -1,5 +1,5 @@
 #include "scene_depth.h"
-#include "camera.h"
+#include "../camera.h"
 #include <map>
 
 SceneDepth::~SceneDepth()
@@ -87,27 +87,16 @@ void SceneDepth::onEnter()
 		1.0f, 0.5f, 0.0f, 1.0f, 0.0f};
 
 	int pointers[] = {3, 2};
-	bool pointer_enable[] = {true, true};
 
-	m_pPlaneController->setVertexInfo(
-		planeVertices, sizeof(planeVertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+	m_pPlaneController->setVertexInfo(planeVertices, pointers);
 
-	m_pCubesController->setVertexInfo(
-		cubeVertices, sizeof(cubeVertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+	m_pCubesController->setVertexInfo(cubeVertices, pointers);
 
-	m_pStencilsController->setVertexInfo(
-		cubeVertices, sizeof(cubeVertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+	m_pStencilsController->setVertexInfo(cubeVertices, pointers);
 
-	m_pGrassesController->setVertexInfo(
-		transparentVertices, sizeof(transparentVertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+	m_pGrassesController->setVertexInfo(transparentVertices, pointers);
 
-	m_pWindowsController->setVertexInfo(
-		transparentVertices, sizeof(transparentVertices),
-		pointers, sizeof(pointers) / sizeof(pointers[0]), pointer_enable);
+	m_pWindowsController->setVertexInfo(transparentVertices, pointers);
 
 	m_vPositions.clear();
 	m_vPositions.push_back(glm::vec3(-1.5f, 0.0f, -0.48f));

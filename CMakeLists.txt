@@ -7,6 +7,8 @@ set(INCLUDE_DIR include)
 set(LIB_DIR lib)
 set(SRC_DIR src)
 set(RES_DIR res)
+set(SCENE_DIR scene)
+set(SHADER_DIR shader)
 
 # include目录和lib目录
 message(STATUS "Configuring include and lib directory")
@@ -15,7 +17,7 @@ link_directories(${LIB_DIR})
 
 # 拷贝资源
 message(STATUS "Copying shader")
-file(COPY ${SRC_DIR}/shader DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${SHADER_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${RES_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 set(HEADER_FILES
@@ -23,7 +25,6 @@ set(HEADER_FILES
     ${SRC_DIR}/controller.h
     ${SRC_DIR}/globals.h
     ${SRC_DIR}/main.h
-    ${SRC_DIR}/scene.h
     ${SRC_DIR}/scenecontroller.h
     ${SRC_DIR}/scenemgr.h
     ${SRC_DIR}/shader.h
@@ -39,7 +40,6 @@ set(SOURCE_FILES
     ${SRC_DIR}/controller.cpp
     ${SRC_DIR}/glad.c
     ${SRC_DIR}/main.cpp
-    ${SRC_DIR}/scene.cpp
     ${SRC_DIR}/scenecontroller.cpp
     ${SRC_DIR}/scenemgr.cpp
     ${SRC_DIR}/shader.cpp
@@ -51,18 +51,20 @@ set(SOURCE_FILES
 )
 
 set(SCENES
-    ${SRC_DIR}/scene_colorrect.h
-    ${SRC_DIR}/scene_texturerect.h
-    ${SRC_DIR}/scene_cube.h
-    ${SRC_DIR}/scene_light.h
-    ${SRC_DIR}/scene_model.h
-    ${SRC_DIR}/scene_depth.h
-    ${SRC_DIR}/scene_colorrect.cpp
-    ${SRC_DIR}/scene_texturerect.cpp
-    ${SRC_DIR}/scene_cube.cpp
-    ${SRC_DIR}/scene_light.cpp
-    ${SRC_DIR}/scene_model.cpp
-    ${SRC_DIR}/scene_depth.cpp
+    ${SRC_DIR}/${SCENE_DIR}/scene.h
+    ${SRC_DIR}/${SCENE_DIR}/scene.cpp
+    ${SRC_DIR}/${SCENE_DIR}/scene_colorrect.h
+    ${SRC_DIR}/${SCENE_DIR}/scene_texturerect.h
+    ${SRC_DIR}/${SCENE_DIR}/scene_cube.h
+    ${SRC_DIR}/${SCENE_DIR}/scene_light.h
+    ${SRC_DIR}/${SCENE_DIR}/scene_model.h
+    ${SRC_DIR}/${SCENE_DIR}/scene_depth.h
+    ${SRC_DIR}/${SCENE_DIR}/scene_colorrect.cpp
+    ${SRC_DIR}/${SCENE_DIR}/scene_texturerect.cpp
+    ${SRC_DIR}/${SCENE_DIR}/scene_cube.cpp
+    ${SRC_DIR}/${SCENE_DIR}/scene_light.cpp
+    ${SRC_DIR}/${SCENE_DIR}/scene_model.cpp
+    ${SRC_DIR}/${SCENE_DIR}/scene_depth.cpp
 )
 
 message(STATUS "Configuring source files and header files")
